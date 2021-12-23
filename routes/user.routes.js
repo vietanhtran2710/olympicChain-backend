@@ -10,7 +10,7 @@ module.exports = app => {
     router.get("/", user.findAll);
 
     // Retrieve single user with address
-    router.get("/", user.findOne)
+    router.get("/:address", user.findOne)
 
     // Retrieve users with a certain role
     router.get("/:role", user.findByRole)

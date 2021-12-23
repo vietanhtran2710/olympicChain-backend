@@ -13,7 +13,10 @@ module.exports = app => {
     router.get("/exercise/:id", question.findByExercise)
 
     // Retrieve all questions of a certain test
-    router.get("/test/:id", question.findByTest)
+    router.get("/test/:address", question.findByTest)
+
+    // Retrieve all questions of a certain category
+    router.get("/category/:category", question.findByCategory)
 
     // Delete a question with id
     router.delete("/:id", question.delete);

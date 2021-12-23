@@ -13,7 +13,7 @@ module.exports = app => {
     router.get("/:id", course.findOne)
 
     // Retrieve all course of a certain teacher
-    router.get("/teacher/:id", course.findByTeacher)
+    router.get("/teacher/:address", course.findByTeacher)
   
     //Update/edit a course with id
     router.put("/:id", course.edit);
