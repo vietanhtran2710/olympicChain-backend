@@ -6,7 +6,7 @@ const { QueryTypes, Op } = require('sequelize');
 // Create a new question
 exports.create = async (req, res) => {
 	const questionData = req.body
-	if (!questionData.questionText || !questionData.choice || (!questionData.testAddress && !questionData.exerciseID)) {
+	if (!questionData.questionText || !questionData.choices || !questionData.category || (!questionData.testAddress && !questionData.exerciseExerciseID)) {
 		res.status(400).send({
 			message: "A required field is missing!"
 		});
@@ -16,9 +16,10 @@ exports.create = async (req, res) => {
     try {
         const question = {
             questionText: questionData.questionText,
-            choice: questionData.choice,
+            choices: questionData.choices,
             testAddress: questionData.testAddress,
-            exerciseID: questionData.exerciseID,
+            exerciseExerciseID: questionData.exerciseExerciseID,
+			category: questionData.category
         }
         await Question.create(question)
         res.status(201).send({ message: 'Created successfully' })
@@ -47,7 +48,7 @@ exports.findAll = (req, res) => {
 exports.findByExercise = (req, res) => {
 	const id = req.params.id;
 
-	Question.findAll({ where: { exerciseID: id } })
+	Question.findAll({ where: { exerciseExerciseID: id } })
 		.then(data => {
 			res.send(data);
 		})

@@ -6,7 +6,7 @@ const { QueryTypes, Op } = require('sequelize');
 // Create a new Course
 exports.create = async (req, res) => {
 	const courseData = req.body
-	if (!courseData.name || !courseData.week || !courseData.description || !courseData.user_address) {
+	if (!courseData.name || !courseData.week || !courseData.description || !courseData.userAddress) {
 		res.status(400).send({
 			message: "A required field is missing!"
 		});
@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
             name: courseData.name,
             week: courseData.week,
             description: courseData.description,
-            user_id: courseData.user_id
+            userAddress: courseData.userAddress
         }
         await Course.create(course)
         res.status(201).send({ message: 'Signup successfully' })
@@ -62,7 +62,7 @@ exports.findOne = (req, res) => {
 exports.findByTeacher = (req, res) => {
 	const teacherAddress = req.params.address;
 
-	Course.findAll({ where: { user_address: teacherAddress } })
+	Course.findAll({ where: { userAddress: teacherAddress } })
     .then(data => {
         res.send(data);
     })
@@ -73,12 +73,12 @@ exports.findByTeacher = (req, res) => {
     });
 };
 
-//Edit an user with address
+//Edit a course with id
 exports.edit = (req, res) => {
-	const address = req.params.address;
+	const id = req.params.id;
 
 	Course.update(req.body, {
-		where: { address }
+		where: { id }
 	})
     .then(num => {
         if (num == 1) {
@@ -102,7 +102,7 @@ exports.edit = (req, res) => {
 exports.delete = (req, res) => {
 	const id = req.params.id;
 
-	Account.destroy({
+	Course.destroy({
 		where: { id: id }
 	})
 		.then(num => {

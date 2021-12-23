@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
         choices: {
             type: DataTypes.TEXT
         },
+        category: {
+            type: DataTypes.STRING(100)
+        },
     }, {
         tableName: "questions",
         timestamps: true,

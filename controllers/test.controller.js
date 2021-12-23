@@ -19,6 +19,7 @@ exports.create = async (req, res) => {
             title: testData.title,
             description: testData.description,
             userAddress: testData.userAddress,
+			courseCourseID: testData.courseCourseID
         }
         await Test.create(user)
         res.status(201).send({ message: 'Created successfully' })
@@ -43,7 +44,7 @@ exports.findAll = (req, res) => {
 		});
 };
 
-// Retrieve single user with address
+// Retrieve single test with address
 exports.findOne = (req, res) => {
 	const address = req.params.address;
 

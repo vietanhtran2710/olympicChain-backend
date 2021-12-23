@@ -3,7 +3,7 @@ const ContestRegistration = db.contestRegistrations;
 const Op = db.Sequelize.Op;
 
 exports.register = (req, res) => {
-    if (!req.body.userAddress || !req.body.contestAddress) {
+    if (!req.body.userAddress || !req.body.testAddress) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
@@ -12,7 +12,7 @@ exports.register = (req, res) => {
   
     const contestRegistration = {
       userAddress: req.body.userAddress,
-      contestAddress: req.body.contestAddress,
+      testAddress: req.body.testAddress,
     };
   
     ContestRegistration.create(contestRegistration)
@@ -42,7 +42,7 @@ exports.getAllContestRegistrations = (req, res) => {
 exports.getStudentRegistrations = (req, res) => {
   const address = req.params.address;
 
-  ContestRegistration.findAll({ where: { contestAddress: address }})
+  ContestRegistration.findAll({ where: { testAddress: address }})
     .then(data => {
       res.send(data);
     })

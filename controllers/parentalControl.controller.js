@@ -3,7 +3,7 @@ const ParentalControl = db.parentalControls;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-    if (!req.body.userAddress || !req.body.courseId) {
+    if (!req.body.childrenAddress || !req.body.parentAddress) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
@@ -11,8 +11,8 @@ exports.create = (req, res) => {
     }
   
     const parentalControl = {
-        userAddress: req.body.userAddress,
-        courseId: req.body.courseId,
+        childrenAddress: req.body.childrenAddress,
+        parentAddress: req.body.courseId,
     };
   
     ParentalControl.create(parentalControl)
@@ -40,9 +40,9 @@ exports.getAllControls = (req, res) => {
 }
 
 exports.getParentChildren = (req, res) => {
-    const courseId = req.params.courseID;
+    const userAddress = req.params.address;
   
-    ParentalControl.findAll({ where: { courseId: courseId } })
+    ParentalControl.findAll({ where: { parentAddress: userAddress } })
       .then(data => {
         res.send(data);
       })
@@ -56,7 +56,7 @@ exports.getParentChildren = (req, res) => {
 exports.getStudentParents = (req, res) => {
     const userAddress = req.params.address;
   
-    ParentalControl.findAll({ where: { userAddress: userAddress } })
+    ParentalControl.findAll({ where: { childrenAddress: userAddress } })
       .then(data => {
         res.send(data);
       })
@@ -68,10 +68,10 @@ exports.getStudentParents = (req, res) => {
 }
 
 exports.checkControl = (req, res) => {
-    const address = req.params.address;
-    const courseId = req.params.courseID;
+    const children = req.params.student;
+    const parent = req.params.parent;
   
-    ParentalControl.findAndCountAll({ where: { userAddress: address, courseId: courseId} })
+    ParentalControl.findAndCountAll({ where: { childrenAddress: children, parentAddress: parent} })
       .then(data => {
         if (data.count == 1)
           res.send({liked: true});
@@ -86,31 +86,32 @@ exports.checkControl = (req, res) => {
 }
 
 exports.verify = (req, res) => {
-	const address = req.params.address;
+	const children = req.params.student;
+  const parent = req.params.parent;
 
 	ParentalControl.update(req.body, {
-		where: { address }
+		where: { childrenAddress: children, parentAddress: parent }
 	})
 		.then(num => {
 			if (num == 1) {
 				res.send({
-					message: "Account was updated successfully."
+					message: "Control was verified successfully."
 				});
 			} else {
 				res.send({
-					message: `Cannot update account with address=${address}. Maybe account was not found or req.body is empty!`
+					message: `Cannot uverify with 2 address=${children}, ${parent}. Maybe account was not found or req.body is empty!`
 				});
 			}
 		})
 		.catch(err => {
 			res.status(500).send({
-				message: `Error updating account with address=${address}, ${err}`
+				message: `Error verifing with address=${address}, ${err}`
 			});
 		});
 };
 
 exports.delete = (req, res) => {
-    if (!req.params.address || !req.params.courseID) {
+    if (!req.params.student || !req.params.parent) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
@@ -118,16 +119,16 @@ exports.delete = (req, res) => {
     }
   
     ParentalControl.destroy({
-      where: { userAddress: rreq.params.address, courseId: rreq.params.courseID }
+      where: { childrenAddress: req.params.student, parentAddress: req.params.parent }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Enrollment was deleted successfully!"
+            message: "Control was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot unenroll. Maybe enrollment was not found!`
+            message: `Cannot delete. Maybe parental control was not found!`
           });
         }
       })

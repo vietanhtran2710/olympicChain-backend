@@ -17,7 +17,7 @@ exports.create = async (req, res) => {
         const exercise = {
             title: exerciseData.title,
             week: exerciseData.week,
-            courseID: exerciseData.courseID,
+            courseCourseID: exerciseData.courseID,
             description: exerciseData.description,
             file: exerciseData.file,
         }
@@ -63,7 +63,7 @@ exports.findOne = (req, res) => {
 exports.findByCourse = (req, res) => {
 	const id = req.params.id;
 
-	Exercise.findAll({ where: { courseID: id } })
+	Exercise.findAll({ where: { courseCourseID: id } })
 		.then(data => {
 			res.send(data);
 		})
