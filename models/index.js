@@ -30,11 +30,11 @@ courses.hasMany(exercises)
 tests.hasMany(questions)
 exercises.hasMany(questions)
 
-users.belongsToMany(courses, { through: {model: courseEnrollments, unique: false}, constraints: false})
-courses.belongsToMany(users, { through: {model: courseEnrollments, unique: false}, constraints: false})
+users.belongsToMany(courses, { through: courseEnrollments})
+courses.belongsToMany(users, { through: courseEnrollments})
 
-users.belongsToMany(tests, { through: {model: courseEnrollments, unique: false}, constraints: false})
-tests.belongsToMany(users, { through: {model: contestRegistrations, unique: false}, constraints: false})
+users.belongsToMany(tests, { through: contestRegistrations})
+tests.belongsToMany(users, { through: contestRegistrations})
 
 const db = {
     users,
