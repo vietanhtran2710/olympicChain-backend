@@ -22,6 +22,7 @@ tests = require("./test.model")(sequelize, DataTypes)
 questions = require('./question.model')(sequelize, DataTypes)
 courseEnrollments = require('./courseEnrollment.model')(sequelize, DataTypes)
 contestRegistrations = require('./contestRegistration.model')(sequelize, DataTypes)
+parentalControls = require('./parentalControl.model')(sequelize, DataTypes)
 
 users.hasMany(courses)
 users.hasMany(tests)
@@ -35,6 +36,10 @@ courses.belongsToMany(users, { through: courseEnrollments})
 
 users.belongsToMany(tests, { through: contestRegistrations})
 tests.belongsToMany(users, { through: contestRegistrations})
+// users.belongsToMany(users, { through: {model: parentalControls, unique: false}, constraints: false})
+
+users.belongsToMany(users, { as: 'children', foreignKey: 'childrenAddress', through: {model: parentalControls }});
+users.belongsToMany(users, { as: 'parents', foreignKey: 'parentAddress', through: {model: parentalControls }});
 
 const db = {
     users,
@@ -44,7 +49,8 @@ const db = {
     tests,
     questions,
     courseEnrollments,
-    contestRegistrations
+    contestRegistrations,
+    parentalControls
 };
 
 db.Sequelize = Sequelize;
