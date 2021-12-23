@@ -29,15 +29,12 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/user.routes")(app);
-require("./routes/account.routes")(app);
-require("./routes/post.routes")(app);
-require("./routes/room.routes")(app)
-require("./routes/comment.routes")(app);
-require("./routes/report.routes")(app);
-require("./routes/userFavorite.routes")(app);
-require("./routes/statistic.routes")(app);
-require("./routes/notification.routes") (app);
-require("./routes/extendRequest.routes") (app);
+require("./routes/course.routes")(app);
+require("./routes/courseEnrollment.routes")(app)
+require("./routes/contestRegistration.routes")(app);
+require("./routes/exercise.routes")(app);
+require("./routes/question.routes")(app);
+require("./routes/test.routes")(app);
 
 const PORT = 8080;
 app.listen(PORT, () => {

@@ -1,0 +1,29 @@
+{
+  "name": "olympicchain-backend",
+  "version": "1.0.0",
+  "description": "Node.js centralized server for OlympicChain dApp",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3",
+    "sequelize": "^7.0.0-alpha.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vietanhtran2710/olympicChain-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vietanhtran2710/olympicChain-backend/issues"
+  },
+  "homepage": "https://github.com/vietanhtran2710/olympicChain-backend#readme"
+}
