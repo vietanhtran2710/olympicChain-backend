@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Test = sequelize.define("test", {
         address: {
-            type: DataTypes.String(40),
+            type: DataTypes.STRING(40),
             primaryKey: true,
         },
         title: {
