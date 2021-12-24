@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         description: {
             type: DataTypes.TEXT
+        },
+        stage: {
+            type: DataTypes.STRING(20)
         }
     }, {
         tableName: "tests",
