@@ -9,6 +9,9 @@ module.exports = app => {
     // Retrieve all users
     router.get("/", user.findAll);
 
+    // Retrieve unverified users
+    router.get("/unverified", user.findUnverified);
+
     // Retrieve single user with address
     router.get("/:address", user.findOne)
 

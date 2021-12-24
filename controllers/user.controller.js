@@ -61,6 +61,21 @@ exports.findOne = (req, res) => {
 };
 
 // Retrieve users with a certain role
+exports.findUnverified = (req, res) => {
+
+	User.findAll({ where: { verified: false } })
+		.then(data => {
+			res.send(data);
+		})
+		.catch(err => {
+			res.status(500).send({
+				message: err.message || "Some error occurred while retrieving accounts."
+			});
+		});
+};
+j2
+
+// Retrieve users with a certain role
 exports.findByRole = (req, res) => {
 	const role = req.params.role;
 
