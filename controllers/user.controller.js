@@ -73,7 +73,6 @@ exports.findUnverified = (req, res) => {
 			});
 		});
 };
-j2
 
 // Retrieve users with a certain role
 exports.findByRole = (req, res) => {
