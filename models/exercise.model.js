@@ -16,6 +16,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         description: {
             type: DataTypes.TEXT
+        },
+        answer: {
+            type: DataTypes.STRING(100)
         }
     }, {
         tableName: "exercises",
