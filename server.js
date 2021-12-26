@@ -36,6 +36,7 @@ require("./routes/exercise.routes")(app);
 require("./routes/question.routes")(app);
 require("./routes/test.routes")(app);
 require("./routes/parentalControl.routes")(app);
+require("./routes/sponsoredContest.routes")(app);
 
 const PORT = 8080;
 app.listen(PORT, () => {
