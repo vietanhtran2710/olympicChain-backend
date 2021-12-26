@@ -6,7 +6,7 @@ const { QueryTypes, Op } = require('sequelize');
 // Create a new exercise
 exports.create = async (req, res) => {
 	const exerciseData = req.body
-	if (!exerciseData.title || !exerciseData.week || !exerciseData.courseID || !exerciseData.description) {
+	if (!exerciseData.title || !exerciseData.week || !exerciseData.courseCourseID || !exerciseData.description || !exerciseData.answer) {
 		res.status(400).send({
 			message: "A required field is missing!"
 		});
@@ -17,9 +17,10 @@ exports.create = async (req, res) => {
         const exercise = {
             title: exerciseData.title,
             week: exerciseData.week,
-            courseCourseID: exerciseData.courseID,
+            courseCourseID: exerciseData.courseCourseID,
             description: exerciseData.description,
             file: exerciseData.file,
+			answer: exerciseData.answer
         }
         await Exercise.create(exercise)
         res.status(201).send({ message: 'Created successfully' })
@@ -79,7 +80,7 @@ exports.edit = (req, res) => {
 	const id = req.params.id;
 
 	Exercise.update(req.body, {
-		where: { address: id }
+		where: { exerciseID: id }
 	})
 		.then(num => {
 			if (num == 1) {
@@ -104,7 +105,7 @@ exports.delete = (req, res) => {
 	const id = req.params.id;
 
 	Exercise.destroy({
-		where: { id: id }
+		where: { exerciseID: id }
 	})
 		.then(num => {
 			if (num == 1) {

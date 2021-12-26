@@ -13,10 +13,10 @@ module.exports = app => {
     router.get("/unverified", user.findUnverified);
 
     // Retrieve single user with address
-    router.get("/:address", user.findOne)
+    router.get("/address/:address", user.findOne)
 
     // Retrieve users with a certain role
-    router.get("/:role", user.findByRole)
+    router.get("/role/:role", user.findByRole)
   
     //Update/edit an user with address
     router.put("/:address", user.edit);

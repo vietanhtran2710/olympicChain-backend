@@ -13,7 +13,7 @@ module.exports = app => {
     router.get("/:id", exercise.findOne);
 
     // Retrieve excerise of a course
-    router.get("/:id", exercise.findByCourse);
+    router.get("/course/:id", exercise.findByCourse);
 
     // Delete a exercise with id
     router.delete("/:id", exercise.delete);
@@ -21,6 +21,6 @@ module.exports = app => {
     //Update/edit a exercise with id
     router.put("/:id", exercise.edit);
   
-    app.use('/api/question', router);
+    app.use('/api/exercise', router);
   };
   

@@ -19,7 +19,8 @@ exports.create = async (req, res) => {
             title: testData.title,
             description: testData.description,
             userAddress: testData.userAddress,
-			courseCourseID: testData.courseCourseID
+			courseCourseID: testData.courseCourseID,
+			stage: "REGISTERING"
         }
         await Test.create(user)
         res.status(201).send({ message: 'Created successfully' })

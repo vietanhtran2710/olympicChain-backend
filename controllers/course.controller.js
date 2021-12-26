@@ -1,5 +1,5 @@
 const db = require("../models");
-const Course = db.users;
+const Course = db.courses;
 const sequelize = db.sequelize
 const { QueryTypes, Op } = require('sequelize');
 
@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
             userAddress: courseData.userAddress
         }
         await Course.create(course)
-        res.status(201).send({ message: 'Signup successfully' })
+        res.status(201).send({ message: 'Course created successfully' })
     } catch (err) {
         res.status(500).send({
             error: err.message || "Some error occurred while creating the course."
@@ -78,7 +78,7 @@ exports.edit = (req, res) => {
 	const id = req.params.id;
 
 	Course.update(req.body, {
-		where: { id }
+		where: { courseID: id }
 	})
     .then(num => {
         if (num == 1) {
@@ -93,7 +93,7 @@ exports.edit = (req, res) => {
     })
     .catch(err => {
         res.status(500).send({
-            message: `Error updating account with id=${id}, ${err}`
+            message: `Error updating course with id=${id}, ${err}`
         });
     });
 };
@@ -103,7 +103,7 @@ exports.delete = (req, res) => {
 	const id = req.params.id;
 
 	Course.destroy({
-		where: { id: id }
+		where: { courseID: id }
 	})
 		.then(num => {
 			if (num == 1) {
