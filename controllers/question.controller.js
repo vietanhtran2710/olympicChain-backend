@@ -19,7 +19,7 @@ exports.create = async (req, res) => {
             choices: questionData.choices,
             testAddress: questionData.testAddress,
             exerciseExerciseID: questionData.exerciseExerciseID,
-			category: questionData.category
+						category: questionData.category
         }
         await Question.create(question)
         res.status(201).send({ message: 'Created successfully' })
@@ -138,8 +138,3 @@ exports.delete = (req, res) => {
 			});
 		});
 };
-
-
-
-
-

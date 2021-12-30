@@ -17,5 +17,5 @@ module.exports = app => {
 
     router.delete('/:student/:parent', parentalControl.delete)
 
-    app.use('/api/contestRegistration', router);
+    app.use('/api/parentalControl', router);
 };

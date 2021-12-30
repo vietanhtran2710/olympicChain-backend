@@ -9,12 +9,12 @@ exports.register = (req, res) => {
       });
       return;
     }
-  
+
     const contestRegistration = {
       userAddress: req.body.userAddress,
       testAddress: req.body.testAddress,
     };
-  
+
     ContestRegistration.create(contestRegistration)
       .then(data => {
           res.send(data);
@@ -42,7 +42,7 @@ exports.getAllContestRegistrations = (req, res) => {
 exports.getStudentRegistrations = (req, res) => {
   const address = req.params.address;
 
-  ContestRegistration.findAll({ where: { testAddress: address }})
+  ContestRegistration.findAll({ where: { userAddress: address }})
     .then(data => {
       res.send(data);
     })

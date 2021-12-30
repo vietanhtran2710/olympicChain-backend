@@ -9,12 +9,12 @@ exports.create = (req, res) => {
       });
       return;
     }
-  
+
     const parentalControl = {
         childrenAddress: req.body.childrenAddress,
-        parentAddress: req.body.courseId,
+        parentAddress: req.body.parentAddress,
     };
-  
+
     ParentalControl.create(parentalControl)
       .then(data => {
           res.send(data);
@@ -41,7 +41,7 @@ exports.getAllControls = (req, res) => {
 
 exports.getParentChildren = (req, res) => {
     const userAddress = req.params.address;
-  
+
     ParentalControl.findAll({ where: { parentAddress: userAddress } })
       .then(data => {
         res.send(data);
@@ -55,7 +55,7 @@ exports.getParentChildren = (req, res) => {
 
 exports.getStudentParents = (req, res) => {
     const userAddress = req.params.address;
-  
+
     ParentalControl.findAll({ where: { childrenAddress: userAddress } })
       .then(data => {
         res.send(data);
@@ -70,12 +70,12 @@ exports.getStudentParents = (req, res) => {
 exports.checkControl = (req, res) => {
     const children = req.params.student;
     const parent = req.params.parent;
-  
+
     ParentalControl.findAndCountAll({ where: { childrenAddress: children, parentAddress: parent} })
       .then(data => {
         if (data.count == 1)
           res.send({liked: true});
-        else 
+        else
           res.send({liked: false});
       })
       .catch(err => {
@@ -117,7 +117,7 @@ exports.delete = (req, res) => {
       });
       return;
     }
-  
+
     ParentalControl.destroy({
       where: { childrenAddress: req.params.student, parentAddress: req.params.parent }
     })

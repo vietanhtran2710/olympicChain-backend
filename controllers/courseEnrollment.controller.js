@@ -3,18 +3,18 @@ const CourseEnrollment = db.courseEnrollments;
 const Op = db.Sequelize.Op;
 
 exports.enroll = (req, res) => {
-    if (!req.body.userAddress || !req.body.courseCourseId) {
+    if (!req.body.userAddress || !req.body.courseCourseID) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
       return;
     }
-  
+
     const courseEnrollment = {
         userAddress: req.body.userAddress,
-        courseCourseId: req.body.courseId,
+        courseCourseID: req.body.courseCourseID,
     };
-  
+
     CourseEnrollment.create(courseEnrollment)
       .then(data => {
           res.send(data);
@@ -41,7 +41,7 @@ exports.getAllCourseEnrollments = (req, res) => {
 
 exports.getCourseEnrolledStudents = (req, res) => {
     const courseId = req.params.courseID;
-  
+
     CourseEnrollment.findAll({ where: { courseCourseId: courseId } })
       .then(data => {
         res.send(data);
@@ -55,7 +55,7 @@ exports.getCourseEnrolledStudents = (req, res) => {
 
 exports.getUserEnrolledCourses = (req, res) => {
     const userAddress = req.params.address;
-  
+
     CourseEnrollment.findAll({ where: { userAddress: userAddress } })
       .then(data => {
         res.send(data);
@@ -70,12 +70,12 @@ exports.getUserEnrolledCourses = (req, res) => {
 exports.checkEnrollment = (req, res) => {
     const address = req.params.address;
     const courseId = req.params.courseID;
-  
+
     CourseEnrollment.findAndCountAll({ where: { userAddress: address, courseCourseId: courseId} })
       .then(data => {
         if (data.count == 1)
           res.send({liked: true});
-        else 
+        else
           res.send({liked: false});
       })
       .catch(err => {
@@ -92,7 +92,7 @@ exports.unenroll = (req, res) => {
       });
       return;
     }
-  
+
     CourseEnrollment.destroy({
       where: { userAddress: req.params.address, courseCourseId: req.params.courseID }
     })
